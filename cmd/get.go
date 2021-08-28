@@ -21,6 +21,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 )
 
@@ -29,11 +30,21 @@ var getCmd = &cobra.Command{
 	Use:   "get",
 	Short: "This command will get the desired Gopher",
 	Long:  `This get command will call GitHub repository in order to return the desired Gopher.`,
-	Run: func(cmd *cobra.Command, args []string) {
+	Args:  cobra.RangeArgs(1, 2),
+	RunE: func(cmd *cobra.Command, args []string) error {
 		var gopherName = "dr-who.png"
 
-		if len(args) >= 1 && args[0] != "" {
+		path, _ := homedir.Dir()
+		path += "/desktop/"
+
+		if len(args) == 1 {
 			gopherName = args[0]
+			fmt.Println(gopherName)
+		}
+		if len(args) == 2 {
+			gopherName = args[0]
+			path = args[1] + "/"
+			fmt.Println(path)
 		}
 
 		URL := "https://github.com/scraly/gophers/raw/main/" + gopherName + ".png"
@@ -49,7 +60,7 @@ var getCmd = &cobra.Command{
 
 		if response.StatusCode == 200 {
 			// Create the file
-			out, err := os.Create(gopherName + ".png")
+			out, err := os.Create(path + gopherName + ".png")
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -59,12 +70,14 @@ var getCmd = &cobra.Command{
 			_, err = io.Copy(out, response.Body)
 			if err != nil {
 				fmt.Println(err)
+				return err
 			}
-
 			fmt.Println("Perfect! Just saved in " + out.Name() + "!")
 		} else {
 			fmt.Println("Error: " + gopherName + " not exists! :-(")
+			return err
 		}
+		return nil
 	},
 }
 
