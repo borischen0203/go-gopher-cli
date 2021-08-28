@@ -26,7 +26,7 @@ builds:
 brews:
   - tap:
       owner: borischen0203
-      name: homebrew-go-gopher-cli
+      name: go-gopher-cli
     folder: Formula
     homepage:  https://goreleaser.com/borischen0203/go-gopher-cli
     description: A tool to get gopher image!
