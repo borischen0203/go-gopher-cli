@@ -21,6 +21,13 @@ builds:
       # the name of the binary that you want to generate - this will also be the binary name for when we get to homebrew...
       # Example: ms checkin <code> where ms is the name of the binary
       binary: main
+brews:
+    - github:
+          owner: borischen0203
+          name: homebrew-go-gopher-cli
+      folder: Formula
+      homepage: https://github.com/borischen0203/go-gopher-cli
+      description: A tool to get gopher image!
 # The different tar archives to build for - includes naming customization and such :)
 archives:
     # default format for Mac (darwin) and Linux
