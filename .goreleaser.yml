@@ -21,8 +21,31 @@ builds:
       # the name of the binary that you want to generate - this will also be the binary name for when we get to homebrew...
       # Example: ms checkin <code> where ms is the name of the binary
       binary: main
+
+
+brews:
+  - tap:
+      owner: borischen0203
+      name: homebrew-go-gopher-cli
+    folder: Formula
+    homepage:  https://goreleaser.com/borischen0203/go-gopher-cli
+    description: A tool to get gopher image!
+    # license: MIT
+    # test: |
+    #   system "#{bin}/goreleaser -v"
+    # dependencies:
+    # - name: go
+    #   type: optional
+    # - name: git
+    # install: |-
+    #   bin.install "goreleaser"
+    #   bash_completion.install "completions/goreleaser.bash" => "goreleaser"
+    #   zsh_completion.install "completions/goreleaser.zsh" => "_goreleaser"
+    #   fish_completion.install "completions/goreleaser.fish"
+
+
 # brews:
-#     - github:
+#     - taps:
 #           owner: borischen0203
 #           name: go-gopher-cli
 #       folder: Formula
