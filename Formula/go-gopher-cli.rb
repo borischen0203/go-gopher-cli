@@ -5,32 +5,43 @@
 class GoGopherCli < Formula
   desc "A tool to get gopher image!"
   homepage "https://goreleaser.com/borischen0203/go-gopher-cli"
-  version "1.1.2"
+  version "1.1.3"
+  license "MIT"
   bottle :unneeded
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.2/go-gopher-cli_1.1.2_macOS-64bit.tar.gz"
-      sha256 "b2eb79cb41b117cca749b8c4a1d8868e7d50417350171c10212da4d7c082f28b"
+      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.3/go-gopher-cli_1.1.3_macOS-64bit.tar.gz"
+      sha256 "1bb8c0c040791eca933818895f30e91395a30186ac56ef97490595a46d39aa7e"
     end
     if Hardware::CPU.arm?
-      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.2/go-gopher-cli_1.1.2_macOS-ARM64.tar.gz"
-      sha256 "7c099ebf225e80f27a0de711d5831c5ba0558ced1f39a4bea04567fe9b5ee57f"
+      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.3/go-gopher-cli_1.1.3_macOS-ARM64.tar.gz"
+      sha256 "a3d2365ff320ef73b733d1e8f2e10a012a4553c25efe5b3b5b29a8610fba53ba"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.2/go-gopher-cli_1.1.2_Linux-64bit.tar.gz"
-      sha256 "355a93a18aeda7c96c82c8438cf185397e6c4aac407eea3d049d022d69cdd52a"
+      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.3/go-gopher-cli_1.1.3_Linux-64bit.tar.gz"
+      sha256 "24276b862dd84c3126bd755f58a240f6abcfc604b072766032443ca3723b47b3"
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.2/go-gopher-cli_1.1.2_Linux-ARM64.tar.gz"
-      sha256 "16c4d4fe09c6967e40abc5f789faecf09a687b24977d2a27d4beabebedde90f9"
+      url "https://github.com/borischen0203/go-gopher-cli/releases/download/v1.1.3/go-gopher-cli_1.1.3_Linux-ARM64.tar.gz"
+      sha256 "e9e3490c009888a54ea40bbaa7f6f7664fffd949a6933c1e31239a2d35b51c77"
     end
   end
 
+  depends_on "go" => :optional
+  depends_on "git"
+
   def install
-    bin.install "go-gopher-cli"
+    bin.install "goreleaser"
+    bash_completion.install "completions/goreleaser.bash" => "goreleaser"
+    zsh_completion.install "completions/goreleaser.zsh" => "_goreleaser"
+    fish_completion.install "completions/goreleaser.fish"
+  end
+
+  test do
+    system "#{bin}/goreleaser -v"
   end
 end
