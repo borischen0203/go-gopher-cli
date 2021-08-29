@@ -38,7 +38,7 @@ brews:
       type: optional
     - name: git
     install: |-
-      bin.install "goreleaser"
+      bin.install "go-gopher-cli"
       bash_completion.install "completions/goreleaser.bash" => "goreleaser"
       zsh_completion.install "completions/goreleaser.zsh" => "_goreleaser"
       fish_completion.install "completions/goreleaser.fish"
